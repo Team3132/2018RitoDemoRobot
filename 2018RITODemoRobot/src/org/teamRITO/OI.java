@@ -42,7 +42,8 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	public OI(
-			Joystick driverGamePad,
+			Joystick driverLeftStick,
+			Joystick driverRightStick,
 			Joystick operatorGamePad,
 			WidgetSubsystem widgetSubsystem
 	) {
@@ -52,10 +53,10 @@ public class OI {
 		 * 
 		 * Also, pressing the A button on the gamepad stops the widget
 		 */
-		new JoystickButton(driverGamePad, 1).whileHeld(new WidgetMoveUpCommand(widgetSubsystem, 0.2));
-		new JoystickButton(driverGamePad, 1).whenReleased(new WidgetStopCommand(widgetSubsystem));
-		new JoystickButton(driverGamePad, 2).whileHeld(new WidgetMoveDownCommand(widgetSubsystem, 0.2));
-		new JoystickButton(driverGamePad, 2).whenReleased(new WidgetStopCommand(widgetSubsystem));
+		new JoystickButton(driverLeftStick, 1).whileHeld(new WidgetMoveUpCommand(widgetSubsystem, 0.2));
+		new JoystickButton(driverLeftStick, 1).whenReleased(new WidgetStopCommand(widgetSubsystem));
+		new JoystickButton(driverRightStick, 1).whileHeld(new WidgetMoveDownCommand(widgetSubsystem, 0.2));
+		new JoystickButton(driverRightStick, 1).whenReleased(new WidgetStopCommand(widgetSubsystem));
 		
 		new JoystickButton(operatorGamePad, GamepadButtons.A_BUTTON).whenPressed(new WidgetStopCommand(widgetSubsystem));
 		

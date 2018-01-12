@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
@@ -45,7 +46,7 @@ public class Robot extends IterativeRobot {
 	private WidgetSubsystem widgetSubsystem;
 	@SuppressWarnings("unused")
 	private static OI oi;
-	private Joystick driverGamePad, operatorGamePad;
+	private Joystick driverLeftStick, driverRightStick, operatorGamePad;
 	private SpeedController leftController, rightController;	// left and right motor controllers
 	private SpeedController widgetController;					// widget motor controllers
 	private DifferentialDrive drive;
@@ -57,13 +58,14 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        driverGamePad = new Joystick(RobotMap.DRIVER_GAMEPAD_ID);
+    	driverLeftStick = new Joystick(RobotMap.DRIVER_LEFT_JOYSTICK_ID);
+    	driverRightStick = new Joystick(RobotMap.DRIVER_RIGHT_JOYSTICK_ID);
         operatorGamePad = new Joystick(RobotMap.OPERATOR_GAMEPAD_ID);
         
 	    // This is how you create controllers that use PWM ports on the RoboRIO.
         // if you have Victors, Sparks, or Talons
-	    leftController = new Spark(RobotMap.DRIVE_LEFT_PWM_ID);
-	    rightController = new Spark(RobotMap.DRIVE_RIGHT_PWM_ID);
+	    leftController = new SpeedControllerGroup(new Spark(RobotMap.DRIVE_LEFT1_PWM_ID), new Spark(RobotMap.DRIVE_LEFT2_PWM_ID));
+	    rightController = new SpeedControllerGroup(new Spark(RobotMap.DRIVE_RIGHT1_PWM_ID), new Spark(RobotMap.DRIVE_RIGHT2_PWM_ID));
 	    // OR
 	    //leftController = new VictorSP(RobotMap.DRIVE_LEFT_PWM_ID);
 	    //rightController = new VictorSP(RobotMap.DRIVE_RIGHT_PWM_ID);
@@ -76,7 +78,7 @@ public class Robot extends IterativeRobot {
     	drive = new DifferentialDrive(leftController, rightController);
     	
     	// the drive subsystem is the wrapper code that ties the joysticks and the drive class together. We also specify the drive style desired.
-        driveSubsystem = new DriveSubsystem(() -> driverGamePad.getRawAxis(1), () -> driverGamePad.getRawAxis(5), drive, RobotMap.DRIVE_STYLE);
+        driveSubsystem = new DriveSubsystem(driverLeftStick::getY, driverRightStick::getY, drive, RobotMap.DRIVE_STYLE);
         
         /*
          *  create a widget subsystem. This is code that controls some widget. In the example code it is just a simple motor.
@@ -99,7 +101,7 @@ public class Robot extends IterativeRobot {
          * The operator interface registers the buttons and their associated commands. When the button is pressed/held/or released the associated command
          * is "fired" or made ready to run. The command will then be executed until it completes, or it is interupted.
          */
-		oi = new OI(driverGamePad, operatorGamePad, widgetSubsystem);		// create operator interface.
+		oi = new OI(driverLeftStick, driverRightStick, operatorGamePad, widgetSubsystem);		// create operator interface.
     }
     
     /**

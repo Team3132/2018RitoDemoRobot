@@ -24,8 +24,9 @@ public class RobotMap {
     // public static int rangefinderModule = 1;
 	
 	// Device configuration
-	public static final int DRIVER_GAMEPAD_ID = 0;
-	public static final int OPERATOR_GAMEPAD_ID = 1;
+	public static final int DRIVER_LEFT_JOYSTICK_ID = 0;
+	public static final int DRIVER_RIGHT_JOYSTICK_ID = 1;
+	public static final int OPERATOR_GAMEPAD_ID = 2;
 	
 	/* Drive Subsystem
 	 * The robot has a single motor on each side.
@@ -37,8 +38,10 @@ public class RobotMap {
 	 * PWM example. The ID is the PWM port on the RoboRIO we plug the talon into.
 	 * The PWM controllers do not provide any feedback. All feedback has to be through external sensors.
 	 */
-	public static final int DRIVE_LEFT_PWM_ID = 0;			// PWM channel for LEFT side
-	public static final int DRIVE_RIGHT_PWM_ID = 2;			// PWM channel for RIGHT side.
+	public static final int DRIVE_LEFT1_PWM_ID = 0;				// PWM channel for LEFT side
+	public static final int DRIVE_LEFT2_PWM_ID = 1;				// PWM channel for LEFT side
+	public static final int DRIVE_RIGHT1_PWM_ID = 2;			// PWM channel for RIGHT side.
+	public static final int DRIVE_RIGHT2_PWM_ID = 3;			// PWM channel for RIGHT side.
 	
 	/*
 	 * Drive style choices.
