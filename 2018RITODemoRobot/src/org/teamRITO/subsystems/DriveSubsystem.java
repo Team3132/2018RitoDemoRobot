@@ -61,8 +61,6 @@ public class DriveSubsystem extends Subsystem {
     		drive.arcadeDrive(left.getAsDouble(), right.getAsDouble(), true);
     		break;
     	case DRIVE_STYLE_TANK:
-    		System.out.printf("Drive(%f, %f)\n", left.getAsDouble(), right.getAsDouble());
-    		//drive.tankDrive(-leftJoystick.getY(), -rightJoystick.getY(), true);
     		drive.tankDrive(left.getAsDouble(), right.getAsDouble(), true);
     		break;
     	case DRIVE_STYLE_CURVE:
