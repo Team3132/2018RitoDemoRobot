@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
@@ -73,7 +74,7 @@ public class Robot extends IterativeRobot {
 	    // If you have multiple motors on each side create the ones you want then combine using a SpeedControllerGroup
 	    
         // use the controllers to create a drive class that will take the move and turn values and pass the correct power to each motor controller.
-    	drive = new DifferentialDrive(leftController, rightController);
+    	drive = new DifferentialDrive(new SpeedControllerGroup(leftController), new SpeedControllerGroup(rightController));
     	
     	// the drive subsystem is the wrapper code that ties the joysticks and the drive class together. We also specify the drive style desired.
         driveSubsystem = new DriveSubsystem(() -> driverGamePad.getRawAxis(1), () -> driverGamePad.getRawAxis(5), drive, RobotMap.DRIVE_STYLE);

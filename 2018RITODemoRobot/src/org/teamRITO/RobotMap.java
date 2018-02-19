@@ -53,7 +53,7 @@ public class RobotMap {
 	// Widget subsystem
 	// The demo robot controls a widget through a motor and speed controller (talon or whatever!)
 	// We can make the motor move 'up' or 'down'. the speed we make it move is controlled here:
-	public static final int WIDGET_CONTROLLER_ID = 3;
+	public static final int WIDGET_CONTROLLER_ID = 9;
 	public static final double WIDGET_SPEED_UP = 0.1;		// UP speed of widget (from 0 to 1)
 	public static final double WIDGET_SPEED_DOWN = -0.1;	// DOWN speed of the widget (from 0 to -1)
 }
